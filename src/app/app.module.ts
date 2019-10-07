@@ -13,6 +13,7 @@ import en from '@angular/common/locales/en';
 import { FooterComponent } from './footer/footer.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoCreateComponent } from './todo-create/todo-create.component';
 
 registerLocaleData(en);
 
@@ -21,7 +22,8 @@ registerLocaleData(en);
     AppComponent,
     FooterComponent,
     SideNavComponent,
-    TodoListComponent
+    TodoListComponent,
+    TodoCreateComponent
   ],
   imports: [
     BrowserModule,

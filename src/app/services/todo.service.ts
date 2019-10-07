@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../models/Todo';
-import { of } from "rxjs";
 import { IndexedDbService } from './indexed-db.service';
 
 @Injectable({
@@ -9,7 +8,7 @@ import { IndexedDbService } from './indexed-db.service';
 export class TodoService extends IndexedDbService {
   private storeName: string = "todo";
   constructor() {
-    super(7, "pwa-app", (db: any) => {
+    super(7, "pwa-app", db => {
       if (!db.objectStoreNames.contains(this.storeName)) {
         db.createObjectStore(this.storeName, { autoIncrement: true });
       }

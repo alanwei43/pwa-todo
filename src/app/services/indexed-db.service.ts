@@ -2,7 +2,7 @@
 export class IndexedDbService {
   private dbOpenPromise: Promise<IDBDatabase> = undefined;
 
-  constructor(version: number, dbName: string, onUpdateVersion: Function) {
+  constructor(version: number, dbName: string, onUpdateVersion: (db: IDBDatabase) => void) {
     this.dbOpenPromise = new Promise((resolve, reject) => {
       const request = window.indexedDB.open(dbName, version);
       request.addEventListener("error", (event: any) => {
