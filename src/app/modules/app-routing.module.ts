@@ -6,6 +6,7 @@ import { TodoCreateComponent } from "../todo-create/todo-create.component";
 const routes: Routes = [
   { path: 'todo/list/:group', component: TodoListComponent },
   { path: 'todo/create', component: TodoCreateComponent },
+  { path: 'todo/create/:group', component: TodoCreateComponent },
 ];
 
 @NgModule({

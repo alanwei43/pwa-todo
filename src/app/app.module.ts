@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoCreateComponent } from './todo-create/todo-create.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TodoCreateComponent } from './todo-create/todo-create.component';
     FooterComponent,
     SideNavComponent,
     TodoListComponent,
-    TodoCreateComponent
+    TodoCreateComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

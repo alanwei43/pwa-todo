@@ -13,13 +13,19 @@ export class TodoService extends IndexedDbService {
         db.createObjectStore(this.storeName, { autoIncrement: true });
       }
     });
-    this.clear(this.storeName);
   }
-  async createTodo(todo: Todo): Promise<void> {
-    await this.insert(this.storeName, todo);
+  async createTodo(todo: Todo): Promise<Todo> {
+    const item = await this.insert(this.storeName, todo);
+    return item;
   }
   async getTodoList(): Promise<Todo[]> {
     const todos = this.getAll<Todo>(this.storeName);
     return todos;
+  }
+  async getTodoGroups(): Promise<string[]> {
+    const todos = await this.getTodoList();
+    const groups = new Set<string>();
+    todos.forEach(item => groups.add(item.group));
+    return Array.from(groups);
   }
 }

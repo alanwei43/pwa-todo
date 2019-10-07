@@ -1,1 +1,5 @@
-<p>side-nav works!</p>
+<ul class="list-group">
+  <a href="#" class="list-group-item list-group-item-action" [class.active]="group.active" *ngFor="let group of groups">
+    {{group.name}}
+  </a>
+</ul>

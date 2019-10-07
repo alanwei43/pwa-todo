@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { TodoService } from '../services/todo.service';
-import { Todo } from '../models/Todo';
+
 
 @Component({
   selector: 'app-side-nav',
@@ -9,9 +11,20 @@ import { Todo } from '../models/Todo';
 })
 export class SideNavComponent implements OnInit {
 
-  constructor(private todoSvc: TodoService) { }
+  groups: Array<{ name: string, active: boolean }> = [];
+  constructor(
+    private todoSvc: TodoService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) { }
 
   ngOnInit() {
+    this.loadTodoGroups();
   }
-
+  async loadTodoGroups() {
+    this.groups = (await this.todoSvc.getTodoGroups()).map(item => ({
+      name: item,
+      active: false
+    }));
+  }
 }

@@ -20,7 +20,7 @@ export class IndexedDbService {
       });
     });
   }
-  async getDb(): Promise<IDBDatabase> {
+  protected async getDb(): Promise<IDBDatabase> {
     if (this.dbOpenPromise === undefined) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -30,7 +30,7 @@ export class IndexedDbService {
     }
     return this.dbOpenPromise;
   }
-  async getStore(storeName: string): Promise<{ db: IDBDatabase, store: IDBObjectStore }> {
+  protected async getStore(storeName: string): Promise<{ db: IDBDatabase, store: IDBObjectStore }> {
     const db = await this.getDb();
     return new Promise((resolve, reject) => {
       const trans = db.transaction(storeName, "readwrite");
@@ -39,7 +39,7 @@ export class IndexedDbService {
       return resolve({ db, store });
     });
   }
-  async query<T>(storeName: string, key: string): Promise<T> {
+  protected async query<T>(storeName: string, key: string): Promise<T> {
     const { db, store } = await this.getStore(storeName);
     return new Promise((resolve, reject) => {
       const q = store.get(key);
@@ -51,14 +51,14 @@ export class IndexedDbService {
       };
     });
   }
-  async insert<T>(storeName: string, row: T): Promise<T> {
+  protected async insert<T>(storeName: string, row: T): Promise<T> {
     const { db, store } = await this.getStore(storeName);
     return new Promise((resolve, reject) => {
       store.add(row);
       resolve(row);
     });
   }
-  async getAll<T>(storeName: string): Promise<T[]> {
+  protected async getAll<T>(storeName: string): Promise<T[]> {
     const { store } = await this.getStore(storeName);
     const cursors = store.openCursor();
     return new Promise((resolve, reject) => {
@@ -75,7 +75,7 @@ export class IndexedDbService {
       cursors.addEventListener("error", (error: Event) => reject(error));
     });
   }
-  async delete(storeName: string, key: any): Promise<void> {
+  protected async delete(storeName: string, key: any): Promise<void> {
     const { store } = await this.getStore(storeName);
     return new Promise((resolve, reject) => {
       const result = store.delete(key);
@@ -87,7 +87,7 @@ export class IndexedDbService {
       })
     });
   }
-  async clear(storeName: string): Promise<void> {
+  protected async clear(storeName: string): Promise<void> {
     const { store } = await this.getStore(storeName);
     return new Promise((resolve, reject) => {
       const result = store.clear();
