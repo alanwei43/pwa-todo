@@ -1,5 +1,5 @@
 <ul class="list-group">
-  <a href="#" class="list-group-item list-group-item-action" [class.active]="group.active" *ngFor="let group of groups">
+  <li class="list-group-item" [class.active]="group.active" (click)="selectGroup(group)" *ngFor="let group of groups">
     {{group.name}}
-  </a>
+  </li>
 </ul>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { TodoService } from '../services/todo.service';
+import { PubSubService } from '../services/pub-sub.service';
 
 
 @Component({
@@ -11,11 +12,12 @@ import { TodoService } from '../services/todo.service';
 })
 export class SideNavComponent implements OnInit {
 
-  groups: Array<{ name: string, active: boolean }> = [];
+  groups: Array<TodoGroup> = [];
   constructor(
     private todoSvc: TodoService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private hubSvc: PubSubService
   ) { }
 
   ngOnInit() {
@@ -27,4 +29,14 @@ export class SideNavComponent implements OnInit {
       active: false
     }));
   }
+  selectGroup(group: TodoGroup) {
+    this.groups.forEach(g => g.active = false);
+    group.active = true;
+    this.location.go(`/todo/${group.name}/list`);
+  }
+}
+
+class TodoGroup {
+  name: string;
+  active: boolean
 }
