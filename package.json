@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "com": "ng generate component",
-    "svc":"ng generate service"
+    "svc": "ng generate service"
   },
   "private": true,
   "dependencies": {
