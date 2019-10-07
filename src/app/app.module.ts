@@ -10,12 +10,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { FooterComponent } from './footer/footer.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FooterComponent,
+    SideNavComponent,
+    TodoListComponent
   ],
   imports: [
     BrowserModule,
